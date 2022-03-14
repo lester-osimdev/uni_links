@@ -32,11 +32,13 @@ public class UniLinksPlugin
     private Context context;
     private boolean initialIntent = true;
 
+    private String ACTION_NFC = "android.nfc.action.NDEF_DISCOVERED";
+
     private void handleIntent(Context context, Intent intent) {
         String action = intent.getAction();
         String dataString = intent.getDataString();
 
-        if (Intent.ACTION_VIEW.equals(action)) {
+        if (Intent.ACTION_VIEW.equals(action) || ACTION_NFC.equals(action)) {
             if (initialIntent) {
                 initialLink = dataString;
                 initialIntent = false;
